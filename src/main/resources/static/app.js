@@ -1,23 +1,32 @@
 var page = null;
+var params = new URLSearchParams(window.location.search);
 
-async function getPageByPageNumber(pageNumber) {
+async function getPageByProps(props) {
+    debugger;
 
-    page = await getPage({page: pageNumber, sortField: 'nombre'});
+    if(typeof props.page === 'undefined' || props.page == null) props.page = 0;
+    if(typeof props.sortField === 'undefined' || props.sortField == null) props.sortField = 'nombre';
+
+    page = await getPage(props);
 
     var personasTable = document.getElementById("personas-table");
     cleanTable(personasTable);
 
     personasTable.appendChild(createTHeadFromObject(page.content[0]));
     personasTable.appendChild(createTBodyFromObjectArray(page.content));
-    setActivePageItem(pageNumber);
+    setActivePageItem(props.page);
 }
 
 function getPreviousPage() {
-    return (page.number - 1) < 0 ? 0 : page.number - 1;
+    var previousPageNumber = page.number - 1;
+    if (previousPageNumber < 0 ) { return; }
+    updateQueryParams(previousPageNumber, params.get('sortField'));
 }
 
 function getNextPage() {
-    return (page.number + 1) < page.totalPages ? page.number + 1 : page.number;
+    var nextPageNumber = page.number + 1;
+    if (nextPageNumber > page.totalPages ) { return; }
+    updateQueryParams(nextPageNumber, params.get('sortField'));
 }
 
 function setActivePageItem(pageNumber) {
@@ -32,4 +41,10 @@ function unSetPreviousActiveItem() {
     pageItemsArray.forEach(pageItem => pageItem.classList.remove("active"))
 }
 
-getPageByPageNumber(0);
+function updateQueryParams(page, sortField) {
+    params.set('page', page == null ? 0 : page);
+    params.set('sortField', sortField == null ? 'nombre' : sortField);
+    window.location.search = params;
+}
+
+getPageByProps({page: +params.get('page'), sortField: params.get('sortField')});

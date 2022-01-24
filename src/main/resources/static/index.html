@@ -22,12 +22,12 @@
         <div class="col-md-auto">
             <nav aria-label="Page navigation example">
                 <ul id="page-items" class="pagination">
-                    <li class="page-item"><a class="page-link" onclick="getPageByPageNumber(getPreviousPage())">Previous</a></li>
-                    <li id="item-0" class="page-item"><a class="page-link" onclick="getPageByPageNumber(0)">1</a></li>
-                    <li id="item-1" class="page-item"><a class="page-link" onclick="getPageByPageNumber(1)">2</a></li>
-                    <li id="item-2" class="page-item"><a class="page-link" onclick="getPageByPageNumber(2)">3</a></li>
-                    <li id="item-3" class="page-item"><a class="page-link" onclick="getPageByPageNumber(3)">4</a></li>
-                    <li class="page-item"><a class="page-link" onclick="getPageByPageNumber(getNextPage())">Next</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPreviousPage()">Previous</a></li>
+                    <li id="item-0" class="page-item"><a class="page-link" href="?page=0&sortField=nombre">1</a></li>
+                    <li id="item-1" class="page-item"><a class="page-link" href="?page=1&sortField=nombre">2</a></li>
+                    <li id="item-2" class="page-item"><a class="page-link" href="?page=2&sortField=nombre">3</a></li>
+                    <li id="item-3" class="page-item"><a class="page-link" href="?page=3&sortField=nombre">4</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getNextPage()">Next</a></li>
                 </ul>
             </nav>
         </div>
