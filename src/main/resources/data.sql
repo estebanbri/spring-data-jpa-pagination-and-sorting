@@ -1,0 +1,22 @@
+insert into PERSONA (id, nombre)
+values
+(1, 'Esteban'),
+(2, 'Maria'),
+(3, 'Jose'),
+(4, 'Hernan'),
+(5, 'Facundo'),
+(6, 'Fabricio'),
+(7, 'Analia'),
+(8, 'Pancracio'),
+(9, 'Lucio'),
+(10, 'Fabian'),
+(11, 'Leonado'),
+(12, 'Leandro'),
+(13, 'Martin'),
+(14, 'Pablo'),
+(15, 'Cris'),
+(16, 'Ziolo'),
+(17, 'Gregorio'),
+(18, 'Daniel'),
+(19, 'Arturo'),
+(20, 'Raul');
