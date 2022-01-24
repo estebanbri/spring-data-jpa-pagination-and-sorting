@@ -1,8 +1,8 @@
 # Pagination y Sorting with Spring Data JPA
 
 Simple table pagination and sorting using:
-- vanilla javascript
-- boostrapp
+- Vanilla javascript
+- Boostrapp
 - Spring Data JPA.
 
 > Example request:
