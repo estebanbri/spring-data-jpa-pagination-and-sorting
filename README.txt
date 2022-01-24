@@ -8,3 +8,4 @@ Example:
 Go to localhost:8080 in browser:
 
 ![Alt text](https://github.com/estebanbri/spring-data-jpa-pagination-and-sorting/blob/master/preview.png?raw=true "Welcome")
+![ScreenShot](https://github.com/estebanbri/spring-data-jpa-pagination-and-sorting/blob/master/preview.png)
