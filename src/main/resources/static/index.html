@@ -1,0 +1,97 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+
+        var page = {
+            content: [],
+            currentPage: 0,
+            totalPages: 0
+        };
+
+
+        async function getPersonasByPageAndSort(currentPage, sortField) {
+            page.currentPage = currentPage;
+
+            var response = await fetch("/api/v1/personas/2?pageNumber=" + page.currentPage + "&sortField=" + sortField);
+            var jsonResponse = await response.json();
+            page.content = jsonResponse.content;
+            page.totalPages = jsonResponse.totalPages;
+
+            var personasTable = document.getElementById("personas-table");
+            personasTable.innerHTML = '';
+            var trHeader = document.createElement('tr');
+            var tBody = document.createElement('tBody');
+
+            createTableHeaders(trHeader);
+
+            tBody.appendChild(trHeader);
+
+            createTableData(tBody);
+
+            personasTable.appendChild(tBody);
+        }
+
+        function createTableHeaders(tr) {
+            for (var i = 0; i < Object.keys(page.content[0]).length; i++) {
+               var th = document.createElement('th');
+               th.appendChild(document.createTextNode(Object.keys(page.content[0])[i]));
+               tr.appendChild(th);
+            }
+        }
+
+        function createTableData(tBody) {
+            for (var i = 0; i < page.content.length; i++) {
+                    var obj = page.content[i];
+                    var trData = document.createElement('tr');
+                    for (var j = 0; j < Object.keys(obj).length; j++) {
+                        var td = document.createElement('td');
+                        td.appendChild(document.createTextNode(obj[Object.keys(obj)[j]]));
+                        trData.appendChild(td);
+                    }
+                tBody.appendChild(trData);
+            }
+        }
+
+        function getPreviousPage() {
+            return (page.currentPage - 1) < 0 ? 0 : page.currentPage - 1;
+        }
+
+        function getNextPage() {
+            return (page.currentPage + 1) < page.totalPages ? page.currentPage + 1 : page.currentPage;
+        }
+
+        getPersonasByPageAndSort(page.currentPage, 'nombre');
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h1>Paginado y Sorted con Spring Data JPA:</h1>
+            <br>
+            <table id="personas-table" border="1" class="table">
+                <!-- elements created dinamically -->
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" onclick="getPersonasByPageAndSort(getPreviousPage(), 'nombre')">Previous</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPersonasByPageAndSort(0, 'nombre')">1</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPersonasByPageAndSort(1, 'nombre')">2</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPersonasByPageAndSort(2, 'nombre')">3</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPersonasByPageAndSort(3, 'nombre')">4</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPersonasByPageAndSort(getNextPage(), 'nombre')">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
