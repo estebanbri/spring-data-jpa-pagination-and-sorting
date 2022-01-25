@@ -2,7 +2,6 @@ var page = null;
 var params = new URLSearchParams(window.location.search);
 
 async function getPageByProps(props) {
-    debugger;
 
     if(typeof props.page === 'undefined' || props.page == null) props.page = 0;
     if(typeof props.sortField === 'undefined' || props.sortField == null) props.sortField = 'nombre';
