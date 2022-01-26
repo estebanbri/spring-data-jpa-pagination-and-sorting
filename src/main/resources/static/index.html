@@ -20,10 +20,10 @@
                     <nav aria-label="Page navigation example">
                         <ul id="page-items" class="pagination">
                             <li class="page-item"><a id="item-prev" class="page-link">Previous</a></li>
-                            <li id="item-0" class="page-item"><a class="page-link" href="?page=0&sortField=nombre">1</a></li>
-                            <li id="item-1" class="page-item"><a class="page-link" href="?page=1&sortField=nombre">2</a></li>
-                            <li id="item-2" class="page-item"><a class="page-link" href="?page=2&sortField=nombre">3</a></li>
-                            <li id="item-3" class="page-item"><a class="page-link" href="?page=3&sortField=nombre">4</a></li>
+                            <li id="item-0" class="page-item"><a class="page-link" href="?page=0&sortField=id">1</a></li> <!--TODO sortField tiene que ser variable-->
+                            <li id="item-1" class="page-item"><a class="page-link" href="?page=1&sortField=id">2</a></li>
+                            <li id="item-2" class="page-item"><a class="page-link" href="?page=2&sortField=id">3</a></li>
+                            <li id="item-3" class="page-item"><a class="page-link" href="?page=3&sortField=id">4</a></li>
                             <li class="page-item"><a id="item-next" class="page-link">Next</a></li>
                         </ul>
                     </nav>
@@ -33,6 +33,10 @@
 
         <!-- Remeber to include js files as last element in body and not include in head tag because this html is loaded from to to bottom so
          if your js is heavy the browser will show a white page while loading your js, to avoid that problem including script tag here will solve that-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
         <script type="module" defer src="main.js"></script>
     </body>
 </html>
