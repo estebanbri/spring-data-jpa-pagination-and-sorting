@@ -1,4 +1,4 @@
-function createTHeadFromObject(obj) {
+export function createTHeadFromObject(obj) {
     var tHead = document.createElement('tHead');
     var tr = document.createElement('tr');
     for (var i = 0; i < Object.keys(obj).length; i++) {
@@ -10,7 +10,7 @@ function createTHeadFromObject(obj) {
     return tHead;
 }
 
-function createTBodyFromObjectArray(objArray) {
+export function createTBodyFromObjectArray(objArray) {
     var tBody = document.createElement('tBody');
     for (var i = 0; i < objArray.length; i++) {
             var obj = objArray[i];
@@ -25,6 +25,6 @@ function createTBodyFromObjectArray(objArray) {
     return tBody;
 }
 
-function cleanTable(table) {
+export function cleanTable(table) {
     table.innerHTML = '';
 }
