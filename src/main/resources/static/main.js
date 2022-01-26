@@ -7,7 +7,7 @@ var params = new URLSearchParams(window.location.search);
 async function main() {
 
     var pageNumber = getOrDefault(+params.get('page'), 0);
-    var sortField = getOrDefault(params.get('sortField'), 'nombre');
+    var sortField = getOrDefault(params.get('sortField'), 'id');
 
     page = await getPage({pageNumber: pageNumber, sortField: sortField});
 
@@ -30,7 +30,7 @@ function unSetPreviousActiveItem() {
 
 function updateQueryParams(page, sortField) {
     params.set('page', page == null ? 0 : page);
-    params.set('sortField', sortField == null ? 'nombre' : sortField);
+    params.set('sortField', sortField == null ? 'id' : sortField);
     window.location.search = params;
 }
 
@@ -52,10 +52,9 @@ document.getElementById('item-prev').addEventListener('click', function() {
 });
 
 document.getElementById('item-next').addEventListener('click', function() {
-        var nextPageNumber = page.number + 1;
-        if (nextPageNumber > page.totalPages ) { return; }
-        updateQueryParams(nextPageNumber, params.get('sortField'));
+    var nextPageNumber = page.number + 1;
+    if (nextPageNumber >= page.totalPages ) { return; }
+    updateQueryParams(nextPageNumber, params.get('sortField'));
 });
-
 
 main();
