@@ -5,9 +5,11 @@ Simple table pagination and sorting using:
 - Boostrapp
 - Spring Data JPA.
 
-> Example request:
-- http://localhost:8080/api/v1/personas/2?pageNumber=0&sortField=nombre
-- http://localhost:8080/api/v1/personas/1?pageNumber=0&sortField=nombre&sortOrder=ASC
+> Go to a browser and type: localhost:8080/app
+
+> Example endpoint request:
+- http://localhost:8080/app/api/v1/personas/page/1?pSortField=nombre
+- http://localhost:8080/app/api/v1/personas/page/1?pSortField=nombre&psortOrder=ASC
 
 > Go to localhost:8080 in browser to see a simple example:
 
