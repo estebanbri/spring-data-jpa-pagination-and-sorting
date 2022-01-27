@@ -2,6 +2,8 @@ package com.example.springdatajpapaginationandsorting.controller;
 
 import com.example.springdatajpapaginationandsorting.model.Persona;
 import com.example.springdatajpapaginationandsorting.repository.PersonaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/personas")
 public class PersonaController {
+
+    private static final Logger logger = LoggerFactory.getLogger(PersonaController.class);
 
     @Value("${page.default.size}")
     private int pageDefaultSize;
@@ -36,6 +40,8 @@ public class PersonaController {
         Integer pageSize =  getOrDefault(pPageSize, pageDefaultSize);
         String sortField = getOrDefault(pSortField, pageDefaultSortField);
         String sortDirection = getOrDefault(pSortDirection, pageDefaultSortDirection);
+
+        logger.info("Page {} requested (Settings: pageSize={}, sortField={}, sortDirection={}) ", pageNumber, pageSize, sortField, sortDirection);
 
         Sort sort = Sort.by(Sort.Direction.valueOf(sortDirection), sortField);
         Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);

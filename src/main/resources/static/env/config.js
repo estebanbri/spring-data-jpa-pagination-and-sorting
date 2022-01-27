@@ -1,3 +1,5 @@
+const CONTEXT_PATH = "/app/";
+
 export const urlGlobal = {
-    getPage: "/api/v1/personas/page/"
+    getPage: CONTEXT_PATH + "api/v1/personas/page/"
 };

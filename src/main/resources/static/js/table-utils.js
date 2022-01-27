@@ -1,9 +1,23 @@
+import { updateQueryParams } from './window-utils.js'
+
 export function createTHeadFromObject(obj) {
     var tHead = document.createElement('tHead');
     var tr = document.createElement('tr');
     for (var i = 0; i < Object.keys(obj).length; i++) {
        var th = document.createElement('th');
-       th.appendChild(document.createTextNode(Object.keys(obj)[i]));
+       var anchor = document.createElement('a');
+       var iElement = document.createElement('i');
+       var key = Object.keys(obj)[i];
+       anchor.id = key;
+       anchor.className = 'sort-field';
+       anchor.style.cssText = "cursor:pointer;border-bottom: 1px solid blue;color:blue";
+       anchor.addEventListener( 'click', function(){
+         updateQueryParams({sortField: this.id});
+       } );
+       iElement.className='bi bi-caret-down-fill';
+       anchor.appendChild(document.createTextNode(key));
+       anchor.appendChild(iElement);
+       th.appendChild(anchor);
        tr.appendChild(th);
     }
     tHead.appendChild(tr);

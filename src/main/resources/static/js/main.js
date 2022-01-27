@@ -1,8 +1,8 @@
-import { getPage } from '../js/page-service.js'
-import { createTHeadFromObject, createTBodyFromObjectArray, cleanTable  } from '../js/table-utils.js'
+import { getPage } from './page-service.js'
+import { createTHeadFromObject, createTBodyFromObjectArray, cleanTable  } from './table-utils.js'
+import { updateQueryParams, params } from './window-utils.js'
 
 var page = null;
-var params = new URLSearchParams(window.location.search);
 
 async function main() {
 
@@ -28,12 +28,6 @@ function unSetPreviousActiveItem() {
     pageItemsArray.forEach(pageItem => pageItem.classList.remove("active"))
 }
 
-function updateQueryParams(page, sortField) {
-    params.set('page', page == null ? 0 : page);
-    params.set('sortField', sortField == null ? 'id' : sortField);
-    window.location.search = params;
-}
-
 function createTableFromPage(page) {
     var personasTable = document.getElementById("personas-table");
     cleanTable(personasTable);
@@ -45,16 +39,26 @@ function getOrDefault(value, defaultValue) {
     return typeof value === 'undefined' || value == null ? defaultValue : value;
 }
 
-document.getElementById('item-prev').addEventListener('click', function() {
-    var previousPageNumber = page.number - 1;
-    if (previousPageNumber < 0 ) { return; }
-    updateQueryParams(previousPageNumber, params.get('sortField'));
+function getPageNumberByElement(anchor) {
+    switch(anchor.id) {
+        case 'item-prev': return page.number - 1;
+        case 'item-next': return page.number + 1;
+        default: return +anchor.innerText - 1;
+    }
+}
+
+document.querySelectorAll('.page-link').forEach(anchor => {
+    anchor.addEventListener('click', function() {
+        var pageNumber = getPageNumberByElement(anchor);
+        if(pageNumber >= page.totalPages || pageNumber < 0) return;
+        updateQueryParams({page: pageNumber});
+    });
 });
 
-document.getElementById('item-next').addEventListener('click', function() {
-    var nextPageNumber = page.number + 1;
-    if (nextPageNumber >= page.totalPages ) { return; }
-    updateQueryParams(nextPageNumber, params.get('sortField'));
+document.querySelectorAll('.sort-field').forEach(anchor => {
+    anchor.addEventListener('click', function() {
+        updateQueryParams({sortField: this.innerText});
+    });
 });
 
 main();
